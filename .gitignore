@@ -1,0 +1,8 @@
+# Ignore huge AI models and vector DBs
+models/
+chroma_db/
+# Ignore python environments and caches
+copilot_env/
+__pycache__/
+*.pyc
+server.log

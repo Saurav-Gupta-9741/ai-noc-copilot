@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI NOC Copilot | Enterprise SD-WAN Diagnostics</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/highlight.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                </div>
+                <div class="title-container">
+                    <h1>AI NOC Copilot <span class="version-tag">ENTERPRISE</span></h1>
+                    <span class="subtitle">Autonomous SD-WAN Diagnostics</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="arch-btn" id="voice-btn" onclick="toggleVoice()">
+                    🔈 <span class="btn-text">Voice: OFF</span>
+                </button>
+                <button class="arch-btn" onclick="toggleArchModal()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span class="btn-text">Architecture</span>
+                </button>
+                <button class="scenarios-btn" onclick="toggleScenarios()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                    <span class="btn-text">Scenarios</span>
+                </button>
+                <div class="status-badge">
+                    <span class="pulse-dot"></span>
+                    <span class="badge-text">SECURE</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Predictive Timeline -->
+        <div class="timeline-container">
+            <div class="timeline-track"></div>
+            <div class="timeline-progress" id="timeline-progress"></div>
+            <div class="timeline-markers">
+                <span class="marker ok active">Normal Operation</span>
+                <span class="marker stress" id="marker-stress">System Stress</span>
+                <span class="marker fail" id="marker-fail">Predicted Failure</span>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="metric"><span class="metric-label">AVG LATENCY</span><span class="metric-value latency-val">12.4 ms</span></div>
+            <div class="metric-divider"></div>
+            <div class="metric"><span class="metric-label">PACKET LOSS</span><span class="metric-value loss-val">0.02%</span></div>
+            <div class="metric-divider"></div>
+            <div class="metric"><span class="metric-label">ACTIVE TUNNELS</span><span class="metric-value tunnel-val">47</span></div>
+            <div class="metric-divider"></div>
+            <div class="metric"><span class="metric-label">BGP PEERS</span><span class="metric-value peer-val">12</span></div>
+            <div class="metric-divider"></div>
+            <div class="metric"><span class="metric-label">UPTIME</span><span class="metric-value uptime-val">99.97%</span></div>
+            <div class="metric-divider"></div>
+            <div class="metric"><span class="metric-label">THREAT LEVEL</span><span class="metric-value threat-val">LOW</span></div>
+        </div>
+
+        <div class="alert-feed" id="alert-feed"></div>
+
+        <main id="chat-window" class="chat-window"></main>
+
+        <footer class="input-bar">
+            <input type="text" id="user-input" placeholder="Paste router logs or diagnostic queries..." autocomplete="off" />
+            <button id="send-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </footer>
+    </div>
+
+    <!-- Architecture Modal -->
+    <div class="modal-overlay" id="arch-modal" onclick="toggleArchModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>System Architecture</h2>
+                <button class="modal-close" onclick="toggleArchModal()">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="arch-diagram">
+                    <div class="arch-row">
+                        <div class="arch-node user-node"><div class="arch-icon">&#x1F468;&#x200D;&#x1F4BB;</div><span>Operator</span></div>
+                        <div class="arch-arrow">&#x2192;</div>
+                        <div class="arch-node ui-node"><div class="arch-icon">&#x1F310;</div><span>Web UI</span></div>
+                        <div class="arch-arrow">&#x2192;</div>
+                        <div class="arch-node api-node"><div class="arch-icon">&#x26A1;</div><span>FastAPI</span></div>
+                    </div>
+                    <div class="arch-connector">&#x2193;</div>
+                    <div class="arch-row">
+                        <div class="arch-node vec-node"><div class="arch-icon">&#x1F5C4;</div><span>ChromaDB</span></div>
+                        <div class="arch-arrow">&#x2190;</div>
+                        <div class="arch-node emb-node"><div class="arch-icon">&#x1F9E0;</div><span>Embedder</span></div>
+                        <div class="arch-arrow">&#x2192;</div>
+                        <div class="arch-node llm-node"><div class="arch-icon">&#x1F916;</div><span>Qwen2-7B</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scenarios Drawer -->
+    <div class="scenarios-drawer" id="scenarios-drawer">
+        <div class="drawer-header">
+            <span>Diagnostic Scenarios</span>
+            <button onclick="toggleScenarios()" class="modal-close">X</button>
+        </div>
+        <div class="drawer-chips" id="drawer-chips"></div>
+    </div>
+
+    <script src="/static/marked.min.js"></script>
+    <script src="/static/highlight.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
