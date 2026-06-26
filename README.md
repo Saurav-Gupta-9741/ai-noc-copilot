@@ -10,6 +10,8 @@
 
 *Predict failures, simulate Root Cause Analysis (RCA), and listen to voice alerts without sending a single byte of telemetry to the cloud.*
 
+### 🎥 [Watch the Full Demo Video Here!](https://drive.google.com/file/d/1gPec0Sj5l7fn3P3PfbpWjmFc9EavsRTC/view?usp=drive_link)
+
 ---
 
 <!-- Add your screenshot here! Just drag and drop it into GitHub -->

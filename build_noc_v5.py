@@ -6,7 +6,7 @@ Confidence Meter, Export Reports, Reactive UI, Mobile Responsive
 """
 import os
 
-BASE = "/scratch/m25cse029/airgapped_copilot"
+BASE = os.path.dirname(os.path.abspath(__file__))
 UI_DIR = os.path.join(BASE, "ui")
 STATIC_DIR = os.path.join(UI_DIR, "static")
 os.makedirs(STATIC_DIR, exist_ok=True)
@@ -37,7 +37,7 @@ model = None
 @app.on_event("startup")
 def boot():
     global embedder, collection, tokenizer, model
-    BASE = Path("/scratch/m25cse029/airgapped_copilot")
+    BASE = Path(__file__).parent.parent
     print("1. Booting Secure NOC Database...")
     client = chromadb.PersistentClient(path=str(BASE / "chroma_db"))
     collection = client.get_collection("secure_docs")
