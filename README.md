@@ -11,11 +11,11 @@
 *Predict failures, simulate Root Cause Analysis (RCA), and listen to voice alerts without sending a single byte of telemetry to the cloud.*
 
 ### 🎥 [Watch the Full Demo Video Here!](https://drive.google.com/file/d/1gPec0Sj5l7fn3P3PfbpWjmFc9EavsRTC/view?usp=drive_link)
+### 📄 [Download the Official ISRO Pitch Presentation](%5BPub%5D%20ISRO%20BAH%202026%20_%20Idea%20Submission%20Template.pdf)
 
 ---
 
-<!-- Add your screenshot here! Just drag and drop it into GitHub -->
-![NOC Dashboard Screenshot Placeholder](https://via.placeholder.com/1000x500.png?text=Add+Your+Stunning+Dashboard+Screenshot+Here)
+![NOC Dashboard Screenshot](AI%20NOC%20Copilot.PNG)
 
 </div>
 
